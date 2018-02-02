@@ -1,0 +1,88 @@
+- alias: 'Autobooking'  
+  trigger:
+    - platform: time
+      at: '00:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: shell_command.autobooking
+    
+- alias: 'Lights on when coming home at night'
+  trigger:
+    - platform: state
+      entity_id: group.users
+      from: 'not_home'
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: input_select.select_option
+      entity_id: input_select.scene
+      data:
+        option: 'Dim'
+    
+- alias: 'Computer on when coming home'
+  trigger:
+    - platform: state
+      entity_id: group.users
+      from: 'not_home'
+      to: 'home'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.computer
+    
+- alias: 'Devices off when leaving home'
+  trigger:
+    - platform: state
+      entity_id: group.users
+      from: 'home'
+      to: 'not_home'
+  action:
+    - service: script.devices_off
+  
+- alias: 'Lights off when playing video'
+  trigger:
+    - platform: state
+      entity_id: media_player.mpchc
+  action:
+    - service_template: >
+        {% if is_state("media_player.mpchc", "playing") %}
+          scene.turn_on
+        {% else %}
+          automation.trigger
+        {% endif %}
+      data_template:
+        entity_id: >
+          {% if is_state("media_player.mpchc", "playing") %}
+            scene.dark
+          {% else %}
+            automation.scenes
+          {% endif %}
+    
+- alias: 'Scenes'
+  trigger:
+    - platform: state
+      entity_id: input_select.scene
+  action:
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.scene", "Dark") %}
+            scene.dark
+          {%-elif is_state("input_select.scene", "Dim") %}
+            scene.dim
+          {%-elif is_state("input_select.scene", "Light") %}
+            scene.light
+          {%-elif is_state("input_select.scene", "Outrun") %}
+            scene.outrun
+          {% else %}
+            none
+          {% endif %}

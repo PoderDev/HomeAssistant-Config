@@ -1,0 +1,8 @@
+scene:
+    name: Scene
+    options:
+     - Dark
+     - Dim
+     - Light
+     - Outrun
+    initial: Dark

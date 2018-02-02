@@ -1,0 +1,11 @@
+devices_off:
+  alias: All devices off
+  sequence:
+  - service: input_select.select_option
+    entity_id: input_select.scene
+    data:
+      option: 'Dark'
+  - service: switch.turn_off
+    entity_id: switch.computer
+  - service: media_player.turn_off
+    entity_id: media_player.tv

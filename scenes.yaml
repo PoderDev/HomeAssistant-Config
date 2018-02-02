@@ -1,0 +1,47 @@
+- name: Light
+  entities:
+    light.desk:
+      state: on
+      kelvin: 3000
+      brightness: 255
+      transition: 2
+    light.center:
+      state: on
+      kelvin: 3000
+      brightness: 255
+      transition: 2
+      
+- name: Dim
+  entities:
+    light.desk:
+      state: on
+      kelvin: 3000
+      brightness: 25
+      transition: 2
+    light.center:
+      state: on
+      kelvin: 3000
+      brightness: 25
+      transition: 2
+      
+- name: Dark
+  entities:
+    light.desk:
+      state: off
+      transition: 2
+    light.center:
+      state: off
+      transition: 2
+      
+- name: Outrun
+  entities:
+    light.desk:
+      state: on
+      rgb_color: [0,255,255]
+      brightness: 255
+      transition: 2
+    light.center:
+      state: on
+      rgb_color: [255,0,255]
+      brightness: 255
+      transition: 2
