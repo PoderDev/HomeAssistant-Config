@@ -1,7 +1,7 @@
 - alias: 'Autobooking'  
   trigger:
     - platform: time
-      at: '00:00:00'
+      at: '00:05:00'
   condition:
     - condition: time
       weekday:
@@ -12,6 +12,21 @@
         - fri
   action:
     - service: shell_command.autobooking
+    
+  - alias: 'Autobooking prerequest'  
+  trigger:
+    - platform: time
+      at: '00:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: shell_command.autobooking_prerequest
     
 - alias: 'Lights on when coming home at night'
   trigger:
