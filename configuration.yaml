@@ -1,73 +1,117 @@
-homeassistant:
-  name: Home
-  latitude: !secret lat
-  longitude: !secret long
-  elevation: !secret elev
-  unit_system: metric
-  time_zone: Europe/Stockholm
-  customize: !include customize.yaml
-  
-frontend:
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Enable mobile app integration
+mobile_app:
+
+# Enable frontend (include for themes)
+frontend: #!include frontend.yaml
+
+# Enable frontend configiration
 config:
 
-http:
+# Enable history
+history:
+
+# Enable logbook
+logbook:
+
+# Enable map
+map:
+
+# Enable sun status
+sun:
+
+# Enable system health integration
+system_health:
+
+# HA update notifier
+updater:
+
+# Lifx lightbulbs
+lifx:
+
+# Map zones
+zone: !include zones.yaml
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+person: !include persons.yaml
+device_tracker: !include device_trackers.yaml
+
+#homeassistant:
+#  name: Home
+#  latitude: !secret lat
+#  longitude: !secret long
+#  elevation: !secret elev
+#  unit_system: metric
+#  time_zone: Europe/Stockholm
+#  customize: !include customize.yaml
+  
+#frontend:
+#config:
+
+#http:
   # api_password: !secret http_pw
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
-updater:
-discovery:
-history:
-logbook:
-sun:
-sensor:
-  - platform: yr
-  - platform: worldclock
-    time_zone: Europe/Stockholm
+  #updater:
+  #discovery:
+  #history:
+  #logbook:
+  #sun:
+  #sensor:
+  #  - platform: yr
+  #  - platform: worldclock
+  #    time_zone: Europe/Stockholm
 
 # ----- Components -----
-mqtt:
-wake_on_lan:
+#mqtt:
+#wake_on_lan:
 
-light:
-  - platform: lifx
+#light:
+#  - platform: lifx
   
-media_player:
-  - platform: webostv
-    host: !secret ip_lgtv
-    name: TV
-    customize:
-      sources:
-        - hdmi1
-    turn_on_action:
-      service: wake_on_lan.send_magic_packet
-      data:
-        mac: !secret mac_lgtv
-  - platform: mpchc
-    host: !secret ip_pqdesktop
-    
-device_tracker:
-  - platform: luci
-    host: !secret ip_router
-    username: root
-    password: !secret router_pw
-    interval_seconds: 3
-    consider_home: 10
-    track_new_devices: no
-
-switch:
-  - platform: wake_on_lan
-    name: "Computer"
-    mac_address: !secret mac_pqdesktop
-    host: !secret ip_pqdesktop
-    turn_off:
-      service: shell_command.computer_sleep
+#media_player:
+#  - platform: webostv
+#    host: !secret ip_lgtv
+#    name: TV
+#    customize:
+#      sources:
+#        - hdmi1
+#    turn_on_action:
+#      service: wake_on_lan.send_magic_packet
+#      data:
+#        mac: !secret mac_lgtv
+#  - platform: mpchc
+#    host: !secret ip_pqdesktop
+#    
+#device_tracker:
+#  - platform: luci
+#    host: !secret ip_router
+#    username: root
+#    password: !secret router_pw
+#    interval_seconds: 3
+#    consider_home: 10
+#    track_new_devices: no
+#
+#switch:
+#  - platform: wake_on_lan
+#    name: "Computer"
+#    mac_address: !secret mac_pqdesktop
+#    host: !secret ip_pqdesktop
+#    turn_off:
+#      service: shell_command.computer_sleep
     
 # ----- Includes -----
-input_select: !include input_selects.yaml
-zone: !include zones.yaml
-group: !include groups.yaml
-automation: !include automations.yaml
-scene: !include scenes.yaml
-script: !include scripts.yaml
-shell_command: !include shell_commands.yaml
+#input_select: !include input_selects.yaml
+#zone: !include zones.yaml
+#group: !include groups.yaml
+#automation: !include automations.yaml
+#scene: !include scenes.yaml
+#script: !include scripts.yaml
+#shell_command: !include shell_commands.yaml

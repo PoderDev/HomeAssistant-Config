@@ -1,0 +1,3 @@
+- name: !secret person_name_p
+  id: !secret person_id_p
+  user_id: !secret user_id_p
