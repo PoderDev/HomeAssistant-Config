@@ -1,47 +1,51 @@
-- name: Light
+- id: light
+  name: Light
   entities:
     light.desk:
-      state: on
+      state: 'on'
       kelvin: 3000
       brightness: 255
       transition: 2
     light.center:
-      state: on
+      state: 'on'
       kelvin: 3000
       brightness: 255
       transition: 2
       
-- name: Dim
+- id: 'dim'
+  name: Dim
   entities:
     light.desk:
-      state: on
+      state: 'on'
       kelvin: 3000
-      brightness: 25
+      brightness: 32
       transition: 2
     light.center:
-      state: on
+      state: 'on'
       kelvin: 3000
-      brightness: 25
+      brightness: 32
       transition: 2
       
-- name: Dark
+- id: 'dark'
+  name: Dark
   entities:
     light.desk:
-      state: off
+      state: 'off'
       transition: 2
     light.center:
-      state: off
+      state: 'off'
       transition: 2
       
-- name: Outrun
+- id: 'outrun'
+  name: Outrun
   entities:
     light.desk:
-      state: on
+      state: 'on'
       rgb_color: [0,255,255]
-      brightness: 255
+      brightness: 32
       transition: 2
     light.center:
-      state: on
+      state: 'on'
       rgb_color: [255,0,255]
-      brightness: 255
+      brightness: 32
       transition: 2

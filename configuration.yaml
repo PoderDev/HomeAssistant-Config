@@ -1,3 +1,15 @@
+# Config
+homeassistant:
+  name: Home
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  elevation: !secret home_elev
+  unit_system: metric
+  time_zone: Europe/Stockholm
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+  
+
 # Text to speech
 tts:
   - platform: google_translate
@@ -32,9 +44,40 @@ updater:
 # Lifx lightbulbs
 lifx:
 
+# LG TV
+webostv:
+  host: !secret ip_lgtv
+  name: LG TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret mac_lgtv
+  customize:
+    sources:
+      - youtube
+      - netflix
+
+media_player:
+
+notify:
+
+# Spotify
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+# Wake on lan
+wake_on_lan:
+
+# PC switch
+switch:
+  - platform: wake_on_lan
+    name: Desktop
+    host: !secret ip_pqdesktop
+    mac: !secret mac_pqdesktop
+
 # Map zones
 zone: !include zones.yaml
-
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
@@ -42,32 +85,7 @@ scene: !include scenes.yaml
 person: !include persons.yaml
 device_tracker: !include device_trackers.yaml
 
-#homeassistant:
-#  name: Home
-#  latitude: !secret lat
-#  longitude: !secret long
-#  elevation: !secret elev
-#  unit_system: metric
-#  time_zone: Europe/Stockholm
-#  customize: !include customize.yaml
-  
-#frontend:
-#config:
 
-#http:
-  # api_password: !secret http_pw
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: example.duckdns.org:8123
-
-  #updater:
-  #discovery:
-  #history:
-  #logbook:
-  #sun:
-  #sensor:
-  #  - platform: yr
-  #  - platform: worldclock
-  #    time_zone: Europe/Stockholm
 
 # ----- Components -----
 #mqtt:
@@ -106,12 +124,3 @@ device_tracker: !include device_trackers.yaml
 #    host: !secret ip_pqdesktop
 #    turn_off:
 #      service: shell_command.computer_sleep
-    
-# ----- Includes -----
-#input_select: !include input_selects.yaml
-#zone: !include zones.yaml
-#group: !include groups.yaml
-#automation: !include automations.yaml
-#scene: !include scenes.yaml
-#script: !include scripts.yaml
-#shell_command: !include shell_commands.yaml
